@@ -1,11 +1,10 @@
 package main
 
 import (
+	handler "ascii-art-web-stylize/handlers"
 	"fmt"
 	"net/http"
 	"os"
-
-	handler "web/handlers"
 )
 
 func main() {

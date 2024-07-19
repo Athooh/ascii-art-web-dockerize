@@ -1,10 +1,10 @@
 package handler
 
 import (
+	utils "ascii-art-web-stylize/utilities"
 	"html/template"
 	"log"
 	"net/http"
-	utils "web/utilities"
 )
 
 type PageData struct {
