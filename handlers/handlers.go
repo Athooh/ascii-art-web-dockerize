@@ -5,6 +5,8 @@ import (
 	"html/template"
 	"log"
 	"net/http"
+	"os"
+	"strconv"
 )
 
 type PageData struct {
@@ -86,6 +88,36 @@ func containsNonASCII(text string) bool {
 		}
 	}
 	return false
+}
+
+func ExportHandler(w http.ResponseWriter, r *http.Request) {
+	asciiArt := r.FormValue("art")
+
+	if asciiArt == "" {
+		renderError(w, 400, "No ASCII art to export")
+		return
+	}
+
+	file, err := os.CreateTemp("", "ascii_art_*.txt")
+	if err != nil {
+		http.Error(w, "Unable to create file", http.StatusInternalServerError)
+		return
+	}
+	defer os.Remove(file.Name()) // Clean up the file after sending
+	defer file.Close()
+
+	_, err = file.WriteString(asciiArt)
+	if err != nil {
+		http.Error(w, "Unable to write to file", http.StatusInternalServerError)
+		return
+	}
+
+	w.Header().Set("Content-Type", "text/plain")
+	w.Header().Set("Content-Disposition", "attachment; filename=ascii_art.txt")
+	w.Header().Set("Content-Length", strconv.Itoa(len(asciiArt)))
+
+	file.Seek(0, 0)
+	http.ServeFile(w, r, file.Name())
 }
 
 func renderForm(w http.ResponseWriter, data PageData) {

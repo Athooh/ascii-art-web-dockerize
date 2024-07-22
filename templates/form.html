@@ -49,7 +49,15 @@
     <div class="result">
         <h1>ASCII Art Result</h1>
         <pre>{{.Art}}</pre>
-        <a href="/">Refresh</a> <!-- Link to refresh the page -->
+        <form action="/export" method="POST">
+            <textarea name="art" style="display: none;">{{.Art}}</textarea>
+        
+        <div class="btn">
+            <button type="submit">Download ASCII Art</button>
+            <a href="/">Refresh</a>
+        </div>
+    </form>
+         <!-- Link to refresh the page -->
     </div>
     {{end}}
 

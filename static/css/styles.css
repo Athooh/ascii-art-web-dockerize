@@ -130,14 +130,32 @@ input[type="submit"] {
     cursor: pointer;
     font-size: 18px;
     border-radius: 5px;
-    margin-top: 20px;
+    margin-top: 20px 30px;
+}
+
+.btn {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 500px;
+}
+.btn input[type="submit"], .btn button {
+    padding: 15px 20px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+    border-radius: 5px;
+    margin-top: 20px 30px;
+    width: 240px;
 }
 
 .result a {
     display: block;
     margin: 20px auto;
     width: 90%;
-    max-width: 460px;
+    max-width: 200px;
     text-align: center;
     padding: 15px 20px;
     background-color: #007BFF;
@@ -149,9 +167,10 @@ input[type="submit"] {
 }
 
 input[type="submit"]:hover,
-.result a:hover {
+.result a:hover, .btn button:hover {
     background-color: #0056b3;
 }
+
 
 #banner {
     background-color: #f8f9fa;
